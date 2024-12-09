@@ -1,0 +1,51 @@
+<html>
+  <head>
+  </head>
+  <body>
+	  <p>
+
+  <div id="details">
+    CoffeeOutside happens every Friday 7:30-8:30 AM (unless noted otherwise) in Calgary
+  </div>
+	  </p>
+	  <p>
+  <div id="location">
+    Loading this week's location...
+  </div>
+  <div id="address">
+  </div>
+  </p>
+  <script type="text/javascript">
+      fetch('yyc.json')
+          .then(function (response) {
+              return response.json();
+          })
+          .then(function (data) {
+              appendData(data);
+          })
+          .catch(function (err) {
+              console.log('error: ' + err);
+          });
+  
+      function appendData(data) {
+        let locContainer = document.getElementById("location");
+        let locAddress = document.getElementById("address");
+        let locStr = "Next location is: " + data.location.name;
+  
+  	locContainer.innerHTML = locStr;
+	if (data.location.address != null) {
+  		locAddress.innerHTML = "Address: " +data.location.address;
+	}
+      }
+  </script>
+  <p>
+  There's several ways to catch the next location:
+  <ul>
+	  <li>This website :-)</li>
+	  <li><a href="https://coffeeoutside.bike/yyc.rss">RSS</a></li>
+	  <li><a href="https://coffeeoutside.bike/yyc.ics">Calendar integration</a> (copy the URL into your phone) <a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fcoffeeoutside.bike%2Fyyc.ics">subscribe to google calender</a></li>
+	  <li><a href="https://yyc.bike/@CoffeeOutside">Mastodon (on https://yyc.bike)</a></li>
+  </ul>
+  </p>
+  <body>
+</html>
