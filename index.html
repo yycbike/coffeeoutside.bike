@@ -12,6 +12,8 @@
   <div id="location">
     Loading this week's location...
   </div>
+  <div id="date">
+  </div>
   <div id="address">
   </div>
   </p>
@@ -30,11 +32,20 @@
       function appendData(data) {
         let locContainer = document.getElementById("location");
         let locAddress = document.getElementById("address");
-        let locStr = "Next location is: " + data.location.name;
+        let locDate = document.getElementById("date");
+        let locName = data.location.name;
+        let locStr = "Next location is: " + locName;
   
+	if (data.location.url != null) {
+                locStr += " <a href=\"" +data.location.url + "\">(web)</a>";
+	}
+	if (data.location.map_url != null) {
+		locStr += " <a href=\"" +data.location.map_url + "\">(map)</a>";
+	}
   	locContainer.innerHTML = locStr;
+  	locDate.innerHTML = "Date: " + data.start_date;
 	if (data.location.address != null) {
-  		locAddress.innerHTML = "Address: " +data.location.address;
+		locAddress.innerHTML = "Address: " +data.location.address;
 	}
       }
   </script>
